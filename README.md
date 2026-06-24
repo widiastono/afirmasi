@@ -1,0 +1,2 @@
+# afirmasi
+Afirmasi
