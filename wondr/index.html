@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>wondr by BNI Mockup</title>
+        <!-- Menghubungkan Web App Manifest untuk Android -->
+        <link rel="manifest" href="manifest.json" />
+
+        <!-- Ikon untuk Home Screen (Dukungan iOS/Safari & Android tambahan) -->
+        <link rel="apple-touch-icon" href="wondr.png" />
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <style>
+            /* --- Variabel Warna & Reset --- */
+            :root {
+                --bg-main: #ffffff;
+                --text-dark: #121212;
+                --text-grey: #6b7280;
+                --orange-bni: #f26622;
+                --orange-link: #f58232;
+                --yellow-tab: #dcf054;
+                --teal-icon: #8fe0d8;
+                --purple-icon: #a6b2ff;
+                --grey-icon: #f3f4f6;
+                --card-portfolio: #bdf2ef;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Inter", sans-serif;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            body {
+                background-color: #e5e7eb; /* Background luar untuk desktop */
+                display: flex;
+                justify-content: center;
+            }
+
+            /* --- Container Aplikasi (Mobile First) --- */
+            .app-container {
+                width: 100%;
+                max-width: 414px;
+                min-height: 100vh;
+                background-color: var(--bg-main);
+                position: relative;
+                overflow-x: hidden;
+                padding-bottom: 100px; /* Ruang untuk floating button */
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+            }
+
+            /* --- Header & Logo --- */
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 20px 20px 15px 20px;
+            }
+
+            .logo-area {
+                display: flex;
+                flex-direction: column;
+                line-height: 1;
+            }
+
+            .logo-wondr {
+                font-size: 26px;
+                font-weight: 800;
+                color: var(--orange-bni);
+                letter-spacing: -1px;
+            }
+
+            .logo-bni {
+                font-size: 9px;
+                font-weight: 700;
+                color: #0063a6; /* BNI Blue */
+                margin-top: 2px;
+                margin-left: 20px;
+            }
+
+            .header-actions {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .btn-poin {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                border: 1px solid #e5e7eb;
+                border-radius: 20px;
+                padding: 6px 12px;
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--text-dark);
+                background: white;
+            }
+
+            .btn-exit {
+                width: 36px;
+                height: 36px;
+                border: 1px solid #e5e7eb;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: white;
+                color: var(--text-dark);
+                font-size: 16px;
+            }
+
+            /* --- Profil & Notifikasi --- */
+            .profile-section {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+            }
+
+            .user-greeting {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                font-size: 18px;
+                font-weight: 700;
+                color: var(--text-dark);
+            }
+
+            .user-greeting i {
+                font-size: 28px;
+            }
+
+            .notification-area {
+                display: flex;
+                gap: 20px;
+            }
+
+            .notif-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-size: 11px;
+                color: var(--text-grey);
+                gap: 5px;
+                position: relative;
+            }
+
+            .notif-item i {
+                font-size: 20px;
+                color: var(--text-dark);
+            }
+
+            .badge-dot {
+                position: absolute;
+                top: -2px;
+                right: 2px;
+                width: 10px;
+                height: 10px;
+                background-color: var(--orange-bni);
+                border-radius: 50%;
+                border: 2px solid white;
+            }
+
+            /* --- Tabs --- */
+            .tabs-container {
+                display: flex;
+                background-color: #f9fafb;
+                margin: 20px 20px;
+                border-radius: 30px;
+                padding: 4px;
+            }
+
+            .tab-item {
+                flex: 1;
+                text-align: center;
+                padding: 10px 0;
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--text-grey);
+                border-radius: 25px;
+            }
+
+            .tab-item.active {
+                background-color: var(--yellow-tab);
+                color: var(--text-dark);
+            }
+
+            /* --- Section Header --- */
+            .section-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 20px;
+                margin-bottom: 15px;
+                margin-top: 30px;
+            }
+
+            .section-header h3 {
+                font-size: 18px;
+                font-weight: 700;
+                color: var(--text-dark);
+            }
+
+            .section-header a {
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--orange-link);
+                text-decoration: none;
+            }
+
+            /* --- Rekening Cards --- */
+            .cards-scroll {
+                display: flex;
+                gap: 15px;
+                padding: 0 20px;
+                overflow-x: auto;
+                scrollbar-width: none; /* Firefox */
+            }
+            .cards-scroll::-webkit-scrollbar {
+                display: none; /* Chrome/Safari */
+            }
+
+            .card-portfolio {
+                min-width: 80px;
+                background-color: var(--card-portfolio);
+                border-radius: 16px;
+                padding: 15px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .portfolio-icon {
+                width: 30px;
+                height: 30px;
+                background: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+            }
+
+            .portfolio-text {
+                font-size: 12px;
+                font-weight: 600;
+                line-height: 1.2;
+                margin-top: 30px;
+            }
+
+            .card-main {
+                min-width: 280px;
+                background: linear-gradient(135deg, #fb894b 0%, #f46624 100%);
+                border-radius: 16px;
+                padding: 20px;
+                color: white;
+                position: relative;
+            }
+
+            .card-type {
+                font-size: 12px;
+                letter-spacing: 1px;
+                opacity: 0.9;
+            }
+
+            .acc-number {
+                font-size: 20px;
+                font-weight: 700;
+                margin-top: 2px;
+                margin-bottom: 25px;
+            }
+
+            .badge-utama {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background-color: white;
+                color: var(--text-dark);
+                font-size: 10px;
+                font-weight: 700;
+                padding: 4px 10px;
+                border-radius: 12px;
+            }
+
+            .balance-label {
+                font-size: 13px;
+                opacity: 0.9;
+            }
+
+            .balance-amount {
+                font-size: 26px;
+                font-weight: 800;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-top: 2px;
+            }
+
+            .balance-amount i {
+                font-size: 16px;
+                opacity: 0.8;
+            }
+
+            /* --- Dots Indicator --- */
+            .dots {
+                display: flex;
+                justify-content: center;
+                gap: 6px;
+                margin-top: 15px;
+            }
+            .dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: #e5e7eb;
+            }
+            .dot.active {
+                background-color: var(--text-dark);
+            }
+
+            /* --- Fitur Pilihan (Grid) --- */
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px 10px;
+                padding: 0 20px;
+            }
+
+            .feature-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 8px;
+            }
+
+            .feature-icon-box {
+                width: 60px;
+                height: 60px;
+                border-radius: 18px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                color: var(--text-dark);
+            }
+
+            .bg-teal {
+                background-color: var(--teal-icon);
+            }
+            .bg-orange {
+                background-color: var(--orange-bni);
+                color: white !important;
+            }
+            .bg-purple {
+                background-color: var(--purple-icon);
+            }
+            .bg-grey {
+                background-color: var(--grey-icon);
+            }
+
+            .feature-name {
+                font-size: 12px;
+                font-weight: 600;
+                line-height: 1.2;
+                color: var(--text-dark);
+            }
+
+            /* --- Promo Section --- */
+            .promo-scroll {
+                display: flex;
+                gap: 15px;
+                padding: 0 20px 20px 20px;
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+            .promo-scroll::-webkit-scrollbar {
+                display: none;
+            }
+
+            .promo-card {
+                min-width: 260px;
+                height: 130px;
+                background: linear-gradient(90deg, #7ad9d3 30%, #306e6a 100%);
+                border-radius: 16px;
+                position: relative;
+                overflow: hidden;
+                padding: 15px;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+
+            .promo-date {
+                background: rgba(255, 255, 255, 0.3);
+                display: inline-block;
+                padding: 4px 10px;
+                border-radius: 12px;
+                font-size: 12px;
+                font-weight: 600;
+                color: #0e3b38;
+                align-self: flex-start;
+                margin-top: auto;
+            }
+
+            /* --- Floating QRIS Button --- */
+            .fab-container {
+                position: fixed;
+                bottom: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 100;
+            }
+
+            /* Fix relative position for mobile container to keep FAB inside */
+            .app-container {
+                position: relative;
+            }
+            @media (min-width: 415px) {
+                .fab-container {
+                    position: absolute; /* Tetap di dalam container jika di desktop */
+                }
+            }
+
+            .btn-qris {
+                background-color: var(--text-dark);
+                color: white;
+                border: none;
+                border-radius: 30px;
+                padding: 12px 30px;
+                font-size: 18px;
+                font-weight: 800;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                letter-spacing: 1px;
+            }
+
+            /* Modifikasi font QRIS mirip aslinya */
+            .qris-text span {
+                font-style: italic;
+                font-weight: 900;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="app-container">
+            <header>
+                <div class="logo-area">
+                    <div class="logo-wondr">wondr</div>
+                    <div class="logo-bni">by BNI</div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-poin">
+                        <i class="fa-solid fa-copyright"></i> Poin
+                    </button>
+                    <button class="btn-exit">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section class="profile-section">
+                <div class="user-greeting">
+                    <i class="fa-regular fa-circle-user"></i>
+                    <span>Hi, Wahyu!</span>
+                </div>
+                <div class="notification-area">
+                    <div class="notif-item">
+                        <div style="position: relative">
+                            <i class="fa-regular fa-bell"></i>
+                            <div class="badge-dot"></div>
+                        </div>
+                        <span>Notifikasi</span>
+                    </div>
+                    <div class="notif-item">
+                        <i class="fa-solid fa-receipt"></i>
+                        <span>Bukti Transaksi</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="tabs-container">
+                <div class="tab-item">Insight</div>
+                <div class="tab-item active">Transaksi</div>
+                <div class="tab-item">Growth</div>
+            </div>
+
+            <div class="section-header">
+                <h3>Rekening transaksi kamu</h3>
+                <a href="#">Lihat Semua</a>
+            </div>
+
+            <div class="cards-scroll">
+                <div class="card-portfolio">
+                    <div class="portfolio-icon">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <div class="portfolio-text">Lihat<br />Portfolio</div>
+                </div>
+
+                <div class="card-main">
+                    <div class="card-type">TAPLUS</div>
+                    <div class="acc-number">102710368</div>
+                    <div class="badge-utama">UTAMA</div>
+
+                    <div class="balance-label">Saldo efektif</div>
+                    <div class="balance-amount">
+                        Rp875.469.704 <i class="fa-solid fa-eye-slash"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dots">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div class="section-header">
+                <h3>Fitur pilihan kamu</h3>
+                <a href="#">Atur</a>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon-box bg-teal">
+                        <i class="fa-regular fa-paper-plane"></i>
+                    </div>
+                    <div class="feature-name">Transfer</div>
+                </div>
+                <div class="feature-item">
+                    <div
+                        class="feature-icon-box bg-orange"
+                        style="
+                            font-size: 14px;
+                            font-weight: 800;
+                            font-style: italic;
+                        "
+                    >
+                        =TapCash
+                    </div>
+                    <div class="feature-name">TapCash</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon-box bg-purple">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="feature-name">Bayar & Beli</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon-box bg-teal">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <div class="feature-name">E-Wallet</div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon-box bg-teal">
+                        <i class="fa-solid fa-money-check-dollar"></i>
+                    </div>
+                    <div class="feature-name">Virtual<br />Account</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon-box bg-teal">
+                        <i class="fa-solid fa-earth-asia"></i>
+                    </div>
+                    <div class="feature-name">Transfer Luar<br />Negeri</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon-box bg-purple">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <div class="feature-name">Lifestyle</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon-box bg-grey">
+                        <i class="fa-solid fa-border-all"></i>
+                    </div>
+                    <div class="feature-name">Lihat Semua</div>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h3>Promo buat kamu</h3>
+                <a href="#">Lihat Semua</a>
+            </div>
+
+            <div class="promo-scroll">
+                <div class="promo-card">
+                    <div class="promo-date">Hingga 27 Agu 2026</div>
+                </div>
+                <div
+                    class="promo-card"
+                    style="
+                        background: linear-gradient(
+                            90deg,
+                            #bdf2ef 30%,
+                            #5ba7a3 100%
+                        );
+                    "
+                >
+                    <div class="promo-date">Hingga 30 Sep 2026</div>
+                </div>
+            </div>
+
+            <div class="fab-container">
+                <button class="btn-qris">
+                    <div class="qris-text">
+                        <i
+                            class="fa-solid fa-qrcode"
+                            style="margin-right: 5px"
+                        ></i
+                        ><span>QRIS</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </body>
+</html>
