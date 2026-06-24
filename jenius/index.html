@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <link
+            rel="icon"
+            sizes="192x192"
+            href="https://play-lh.googleusercontent.com/bmW78ooeOboSNnpZKGxfJgXFUfacJ5Ye7Af8MHKKoKpVMNsDXnxyExShw30nGwS55QjY"
+        />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Jenius Mockup</title>
+        <!-- Menghubungkan Web App Manifest untuk Android -->
+        <link rel="manifest" href="manifest.json" />
+
+        <!-- Ikon untuk Home Screen (Dukungan iOS/Safari & Android tambahan) -->
+        <link rel="apple-touch-icon" href="logo.png" />
+
+        <!-- Google Fonts: Roboto / Inter -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <!-- FontAwesome Icons -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <style>
+            /* --- CSS Reset & Variables --- */
+            :root {
+                --jenius-teal: #00a599;
+                --jenius-blue: #0087cd;
+                --jenius-purple: #832b84;
+                --bg-light: #f5f6f8;
+                --text-main: #333333;
+                --text-muted: #757575;
+                --white: #ffffff;
+                --border-color: #e2e2e2;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Inter", sans-serif;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            body {
+                background-color: #c9cdd4; /* Latar belakang untuk tampilan desktop */
+                display: flex;
+                justify-content: center;
+            }
+
+            /* --- Mobile App Container --- */
+            .app-container {
+                width: 100%;
+                max-width: 414px;
+                min-height: 100vh;
+                background-color: var(--white);
+                position: relative;
+                overflow-x: hidden;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* --- Hero / Header Section --- */
+            .hero-section {
+                background-color: var(--jenius-teal);
+                padding: 20px 20px 80px 20px;
+                color: var(--white);
+                position: relative;
+                overflow: hidden;
+            }
+
+            /* Decorative Landscape (Mocking the illustration) */
+            .landscape {
+                position: absolute;
+                bottom: 30px;
+                left: 0;
+                width: 100%;
+                height: 100px;
+                z-index: 1;
+                pointer-events: none;
+            }
+
+            .sun {
+                position: absolute;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 120px;
+                height: 120px;
+                background-color: #ffd645;
+                border-radius: 50%;
+            }
+
+            .hill-1 {
+                position: absolute;
+                bottom: -20px;
+                left: -30%;
+                width: 100%;
+                height: 80px;
+                background-color: #008f84;
+                border-radius: 50%;
+            }
+
+            .hill-2 {
+                position: absolute;
+                bottom: -30px;
+                right: -20%;
+                width: 120%;
+                height: 90px;
+                background-color: #007a71;
+                border-radius: 50%;
+            }
+
+            .top-bar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
+                z-index: 2;
+                margin-bottom: 25px;
+            }
+
+            .profile-info {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .avatar {
+                width: 40px;
+                height: 40px;
+                background-color: #c4c4c4;
+                border-radius: 50%;
+            }
+
+            .user-tags {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .cashtag {
+                font-size: 15px;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .cashtag i {
+                font-size: 11px;
+            }
+
+            .account-type {
+                font-size: 12px;
+                font-weight: 400;
+                opacity: 0.9;
+            }
+
+            .header-icons {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+            }
+
+            .header-icons .icon-wrapper {
+                position: relative;
+                font-size: 20px;
+            }
+
+            .badge-red {
+                position: absolute;
+                top: -4px;
+                right: -4px;
+                background-color: #ff4747;
+                color: white;
+                font-size: 9px;
+                font-weight: bold;
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .greeting-area {
+                text-align: center;
+                position: relative;
+                z-index: 2;
+                margin-top: 10px;
+            }
+
+            .greeting-area h1 {
+                font-size: 18px;
+                font-weight: 700;
+                margin-bottom: 4px;
+                letter-spacing: 0.5px;
+            }
+
+            .greeting-area p {
+                font-size: 13px;
+                font-weight: 400;
+                opacity: 0.9;
+            }
+
+            /* --- Content Sheet --- */
+            .content-sheet {
+                background-color: var(--white);
+                border-top-left-radius: 24px;
+                border-top-right-radius: 24px;
+                padding: 25px 20px;
+                margin-top: -30px;
+                position: relative;
+                z-index: 10;
+                flex-grow: 1;
+                padding-bottom: 100px; /* Space for bottom nav */
+            }
+
+            /* Currency Header */
+            .currency-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .currency-tabs {
+                display: flex;
+                gap: 20px;
+            }
+
+            .currency-tab {
+                font-size: 15px;
+                font-weight: 700;
+                color: var(--jenius-blue);
+                position: relative;
+            }
+
+            .currency-tab::after {
+                content: "";
+                position: absolute;
+                bottom: -6px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 4px;
+                height: 4px;
+                background-color: var(--jenius-blue);
+                border-radius: 50%;
+            }
+
+            .btn-rates {
+                border: 1px solid var(--text-muted);
+                color: var(--text-muted);
+                padding: 5px 12px;
+                border-radius: 20px;
+                font-size: 13px;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            /* Account Card */
+            .account-card {
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                overflow: hidden;
+                margin-bottom: 25px;
+            }
+
+            .acc-row-top {
+                background-color: #f9f9f9;
+                padding: 15px 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .acc-row-top span:first-child {
+                color: var(--text-muted);
+                font-size: 13px;
+                font-weight: 500;
+            }
+
+            .acc-number {
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--text-main);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .acc-number i {
+                color: var(--text-muted);
+                font-size: 14px;
+            }
+
+            .acc-row-bottom {
+                padding: 15px 20px 20px 20px;
+                position: relative;
+            }
+
+            .balance-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+            .balance-header span:first-child {
+                color: var(--text-muted);
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            .view-trx {
+                color: var(--jenius-blue);
+                font-size: 13px;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+
+            .balance-amount {
+                display: flex;
+                align-items: baseline;
+                gap: 5px;
+                margin-top: 5px;
+            }
+
+            .currency-symbol {
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--text-main);
+            }
+
+            .amount-value {
+                font-size: 28px;
+                font-weight: 400;
+                color: var(--text-main);
+                letter-spacing: -1px;
+            }
+
+            .balance-amount i {
+                color: var(--text-muted);
+                font-size: 14px;
+                margin-left: 5px;
+            }
+
+            /* Mock Torch Illustration */
+            .torch-ill {
+                position: absolute;
+                bottom: 0;
+                right: 20px;
+                width: 50px;
+                height: 60px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+            }
+
+            .flame {
+                width: 25px;
+                height: 35px;
+                background: linear-gradient(180deg, #ff9a00 0%, #ff5200 100%);
+                border-radius: 50% 50% 20% 20%;
+                margin-bottom: -5px;
+                position: relative;
+                z-index: 2;
+            }
+
+            .torch-base {
+                width: 40px;
+                height: 30px;
+                background-color: #85d2eb;
+                clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+            }
+
+            /* Action Menu */
+            .action-menu {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 10px;
+                margin-bottom: 25px;
+            }
+
+            .action-icon {
+                width: 45px;
+                height: 45px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 22px;
+                color: var(--jenius-blue);
+                border-radius: 12px;
+            }
+
+            /* Promo Banner */
+            .promo-banner {
+                background-color: var(--jenius-purple);
+                color: var(--white);
+                border-radius: 10px;
+                padding: 12px 15px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                position: relative;
+                margin-bottom: 15px;
+            }
+
+            .promo-banner::after {
+                content: "";
+                position: absolute;
+                bottom: -8px;
+                right: 30px;
+                border-width: 8px 8px 0;
+                border-style: solid;
+                border-color: var(--jenius-purple) transparent transparent
+                    transparent;
+            }
+
+            .gauge-icon {
+                width: 30px;
+                height: 30px;
+                background-color: var(--white);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--jenius-purple);
+                font-size: 16px;
+            }
+
+            .promo-text {
+                font-size: 13px;
+                font-weight: 500;
+                flex-grow: 1;
+            }
+
+            .btn-close {
+                width: 20px;
+                height: 20px;
+                background-color: rgba(255, 255, 255, 0.2);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 10px;
+                color: var(--white);
+            }
+
+            /* --- Bottom Navigation --- */
+            .bottom-nav {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                padding: 10px 10px 15px 10px;
+                border-top: 1px solid var(--border-color);
+                z-index: 20;
+            }
+
+            .nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 6px;
+                color: var(--text-muted);
+                font-size: 11px;
+                font-weight: 500;
+                width: 60px;
+                position: relative;
+            }
+
+            .nav-item.active {
+                color: var(--text-main);
+                font-weight: 700;
+            }
+
+            .nav-item.active i {
+                color: var(--jenius-teal);
+            }
+
+            .nav-item i {
+                font-size: 20px;
+            }
+
+            .nav-badge {
+                position: absolute;
+                top: -2px;
+                right: 15px;
+                width: 8px;
+                height: 8px;
+                background-color: #ff4747;
+                border-radius: 50%;
+            }
+
+            /* Floating Menu Button */
+            .fab-wrapper {
+                position: relative;
+                top: -20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .fab-button {
+                width: 55px;
+                height: 55px;
+                background-color: var(--jenius-blue);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 12px rgba(0, 135, 205, 0.4);
+                border: 4px solid var(--white);
+                position: relative;
+            }
+
+            /* Concentric circles inside FAB */
+            .fab-inner-1 {
+                width: 30px;
+                height: 30px;
+                border: 2px solid var(--white);
+                border-radius: 50%;
+                position: absolute;
+                opacity: 0.8;
+            }
+            .fab-inner-2 {
+                width: 18px;
+                height: 18px;
+                border: 2px solid var(--white);
+                border-radius: 50%;
+                position: absolute;
+            }
+
+            .fab-text {
+                font-size: 11px;
+                font-weight: 500;
+                color: var(--text-muted);
+                margin-top: 2px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="app-container">
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <div class="landscape">
+                    <div class="sun"></div>
+                    <div class="hill-1"></div>
+                    <div class="hill-2"></div>
+                </div>
+
+                <div class="top-bar">
+                    <div class="profile-info">
+                        <div class="avatar"></div>
+                        <div class="user-tags">
+                            <div class="cashtag">
+                                $wahyuwidiastono
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                            <div class="account-type">Personal Account</div>
+                        </div>
+                    </div>
+                    <div class="header-icons">
+                        <div class="icon-wrapper">
+                            <i class="fa-regular fa-message"></i>
+                        </div>
+                        <div class="icon-wrapper">
+                            <i class="fa-regular fa-bell"></i>
+                            <div class="badge-red">4</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="greeting-area">
+                    <h1>Hi, SSOHSIOOSVIOOO</h1>
+                    <p>Think Unthinkable</p>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="content-sheet">
+                <!-- Currency Header -->
+                <div class="currency-header">
+                    <div class="currency-tabs">
+                        <div class="currency-tab">IDR</div>
+                    </div>
+                    <div class="btn-rates">
+                        Rates
+                        <i
+                            class="fa-solid fa-chevron-right"
+                            style="font-size: 10px"
+                        ></i>
+                    </div>
+                </div>
+
+                <!-- Account Card -->
+                <div class="account-card">
+                    <div class="acc-row-top">
+                        <span>Account no.</span>
+                        <div class="acc-number">
+                            90180116855 <i class="fa-regular fa-copy"></i>
+                        </div>
+                    </div>
+                    <div class="acc-row-bottom">
+                        <div class="balance-header">
+                            <span>Active Balance</span>
+                            <div class="view-trx">
+                                View transactions
+                                <i
+                                    class="fa-solid fa-chevron-right"
+                                    style="font-size: 10px"
+                                ></i>
+                            </div>
+                        </div>
+                        <div class="balance-amount">
+                            <span class="currency-symbol">IDR</span>
+                            <span class="amount-value">114.787.215</span>
+                            <i class="fa-solid fa-eye-slash"></i>
+                        </div>
+
+                        <!-- Stylized Torch Illustration -->
+                        <div class="torch-ill">
+                            <div class="flame"></div>
+                            <div class="torch-base"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Menu -->
+                <div class="action-menu">
+                    <div class="action-icon">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                    <div class="action-icon">
+                        <i class="fa-regular fa-paper-plane"></i>
+                    </div>
+                    <div class="action-icon">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="action-icon">
+                        <i class="fa-solid fa-qrcode"></i>
+                    </div>
+                </div>
+
+                <!-- Promo Banner -->
+                <div class="promo-banner">
+                    <div class="gauge-icon">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+                    <div class="promo-text">
+                        Check your limit from 3 credit products!
+                    </div>
+                    <div class="btn-close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <div class="nav-item active">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-sack-dollar"></i>
+                    <span>Wealth</span>
+                </div>
+
+                <div class="fab-wrapper">
+                    <div class="fab-button">
+                        <div class="fab-inner-1"></div>
+                        <div class="fab-inner-2"></div>
+                    </div>
+                    <span class="fab-text">Menu</span>
+                </div>
+
+                <div class="nav-item">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <span>Cards</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-badge"></div>
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Credit</span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

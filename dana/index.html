@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DANA Mockup</title>
+        <!-- Menghubungkan Web App Manifest untuk Android -->
+        <link rel="manifest" href="manifest.json" />
+
+        <!-- Ikon untuk Home Screen (Dukungan iOS/Safari & Android tambahan) -->
+        <link rel="apple-touch-icon" href="logo.png" />
+
+        <!-- Google Fonts: Inter -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+        <!-- FontAwesome Icons -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <style>
+            /* --- CSS Reset & Variables --- */
+            :root {
+                --dana-blue: #118ee9;
+                --dana-blue-light: #48a5f2;
+                --dana-blue-dark: #0c72c0;
+                --bg-gray: #f5f5f5;
+                --text-dark: #333333;
+                --text-muted: #757575;
+                --white: #ffffff;
+                --border-color: #e5e5e5;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Inter", sans-serif;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            body {
+                background-color: #d1d5db; /* Desktop background */
+                display: flex;
+                justify-content: center;
+            }
+
+            /* --- Mobile App Container --- */
+            .app-container {
+                width: 100%;
+                max-width: 414px;
+                min-height: 100vh;
+                background-color: var(--bg-gray);
+                position: relative;
+                overflow-x: hidden;
+                padding-bottom: 90px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* --- Header Section (Blue) --- */
+            .header-section {
+                background-color: var(--dana-blue);
+                background: linear-gradient(
+                    180deg,
+                    var(--dana-blue) 0%,
+                    var(--dana-blue-light) 100%
+                );
+                padding: 15px 20px 40px 20px;
+                color: var(--white);
+                position: relative;
+            }
+
+            .top-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 25px;
+            }
+
+            .balance-area {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .dana-logo-icon {
+                width: 32px;
+                height: 32px;
+                background-color: var(--white);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--dana-blue);
+                font-size: 18px;
+            }
+
+            .balance-text {
+                font-size: 14px;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .balance-text span {
+                font-size: 22px;
+                font-weight: 700;
+            }
+
+            .btn-try-dana {
+                background: linear-gradient(90deg, #4da6f5 0%, #118ee9 100%);
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                border-radius: 20px;
+                padding: 6px 12px;
+                font-size: 13px;
+                font-weight: 700;
+                color: var(--white);
+                position: relative;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .dot-indicator {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                width: 8px;
+                height: 8px;
+                background-color: #ff3b3b;
+                border-radius: 50%;
+                border: 1px solid var(--white);
+            }
+
+            .action-row {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 10px;
+                margin-bottom: 20px;
+            }
+
+            .action-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                font-size: 13px;
+                font-weight: 600;
+            }
+
+            .action-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+                position: relative;
+            }
+
+            /* Mock Top Promo Area in Header */
+            .header-promo {
+                background-color: var(--dana-blue-dark);
+                border-radius: 12px;
+                padding: 15px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                margin: 0 5px;
+            }
+
+            .header-promo h3 {
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 2px;
+            }
+            .header-promo h3 span {
+                color: #ffeb3b;
+            }
+            .btn-beli {
+                background-color: #ff5e5e;
+                color: var(--white);
+                border-radius: 20px;
+                padding: 5px 20px;
+                font-size: 12px;
+                font-weight: 800;
+                margin-top: 8px;
+                text-transform: uppercase;
+            }
+
+            /* --- Main Content (White Sheet) --- */
+            .main-content {
+                padding: 0 15px;
+                margin-top: -20px;
+                position: relative;
+                z-index: 10;
+            }
+
+            .services-card {
+                background-color: var(--white);
+                border-radius: 16px;
+                padding: 20px 15px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                margin-bottom: 15px;
+            }
+
+            .services-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px 10px;
+            }
+
+            .service-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 8px;
+                position: relative;
+            }
+
+            .service-icon {
+                width: 45px;
+                height: 45px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+            }
+
+            .service-text {
+                font-size: 12px;
+                font-weight: 500;
+                color: var(--text-dark);
+                line-height: 1.2;
+            }
+
+            .badge-small {
+                position: absolute;
+                top: -5px;
+                background-color: #ff3b3b;
+                color: white;
+                font-size: 8px;
+                font-weight: 800;
+                padding: 2px 6px;
+                border-radius: 8px;
+                border: 1px solid white;
+                z-index: 2;
+            }
+
+            /* Service Icon Colors */
+            .icon-google {
+                color: #ea4335;
+            } /* Mocking Play Store */
+            .icon-rewards {
+                color: #fbbc05;
+            }
+            .icon-pulsa {
+                color: #ff5e5e;
+            }
+            .icon-travel {
+                color: #5c6bc0;
+            }
+            .icon-jolibox {
+                color: #9c27b0;
+            }
+            .icon-electricity {
+                color: #ff9800;
+            }
+            .icon-kaget {
+                color: var(--dana-blue);
+            }
+            .icon-viewall {
+                color: var(--text-muted);
+            }
+
+            /* Feed Card */
+            .feed-card {
+                background-color: var(--white);
+                border-radius: 12px;
+                padding: 15px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                margin-bottom: 15px;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .feed-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .feed-icon-left {
+                color: var(--dana-blue);
+                font-size: 18px;
+            }
+
+            .feed-text {
+                font-size: 13px;
+                color: var(--text-dark);
+                flex-grow: 1;
+            }
+
+            .feed-text strong {
+                font-weight: 700;
+            }
+
+            .feed-icon-right {
+                color: var(--dana-blue);
+                font-size: 14px;
+            }
+
+            /* Promo Banner Carousel */
+            .promo-carousel {
+                display: flex;
+                gap: 10px;
+                overflow-x: auto;
+                scrollbar-width: none;
+                margin-bottom: 15px;
+            }
+            .promo-carousel::-webkit-scrollbar {
+                display: none;
+            }
+
+            .promo-banner-large {
+                min-width: 90%;
+                height: 140px;
+                background: linear-gradient(135deg, #1de9b6 0%, #118ee9 100%);
+                border-radius: 12px;
+                padding: 15px;
+                color: var(--white);
+                position: relative;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .promo-banner-large h4 {
+                font-size: 13px;
+                font-weight: 800;
+                text-transform: uppercase;
+                margin-bottom: 2px;
+            }
+            .promo-banner-large h2 {
+                font-size: 34px;
+                font-weight: 900;
+                line-height: 1;
+                margin-bottom: 5px;
+                font-style: italic;
+                letter-spacing: -1px;
+            }
+            .promo-banner-large h2 sup {
+                font-size: 16px;
+            }
+            .promo-banner-large p {
+                font-size: 13px;
+                font-weight: 600;
+            }
+
+            .promo-banner-large::after {
+                content: "";
+                position: absolute;
+                right: -20px;
+                bottom: -20px;
+                width: 100px;
+                height: 100px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 50%;
+            }
+
+            .promo-banner-secondary {
+                min-width: 90%;
+                background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+                border-radius: 12px;
+            }
+
+            /* Protection Banner */
+            .protection-banner {
+                background-color: var(--dana-blue);
+                border-radius: 10px;
+                padding: 12px 15px;
+                color: var(--white);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 30px;
+            }
+
+            /* --- Bottom Navigation --- */
+            .bottom-nav {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                background-color: var(--white);
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                padding: 10px 10px 15px 10px;
+                box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.05);
+                z-index: 20;
+            }
+
+            .nav-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+                color: var(--text-dark);
+                font-size: 11px;
+                font-weight: 500;
+                width: 60px;
+            }
+
+            .nav-item.active {
+                font-weight: 700;
+            }
+
+            .nav-item i {
+                font-size: 22px;
+                color: var(--text-dark);
+            }
+
+            /* Floating Center Button (PAY) */
+            .pay-container {
+                position: relative;
+                top: -25px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+                z-index: 30;
+            }
+
+            .btn-pay {
+                width: 65px;
+                height: 65px;
+                background-color: var(--dana-blue);
+                border-radius: 50%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                color: var(--white);
+                border: 5px solid var(--bg-gray);
+                box-shadow: 0 4px 10px rgba(17, 142, 233, 0.3);
+            }
+
+            .btn-pay i {
+                font-size: 24px;
+                color: var(--white);
+            }
+
+            .btn-pay span {
+                font-size: 11px;
+                font-weight: 700;
+                margin-top: 2px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="app-container">
+            <!-- Header / Blue Section -->
+            <div class="header-section">
+                <div class="top-row">
+                    <div class="balance-area">
+                        <div class="dana-logo-icon">
+                            <i class="fa-solid fa-wallet"></i>
+                        </div>
+                        <div class="balance-text">
+                            Rp <span>218.781.539</span>
+                            <i
+                                class="fa-solid fa-eye-slash"
+                                style="font-size: 12px; margin-left: 5px"
+                            ></i>
+                        </div>
+                    </div>
+                    <div class="btn-try-dana">
+                        Try DANA+
+                        <div class="dot-indicator"></div>
+                    </div>
+                </div>
+
+                <div class="action-row">
+                    <div class="action-item">
+                        <div class="action-icon">
+                            <i class="fa-solid fa-square-plus"></i>
+                        </div>
+                        Top up
+                    </div>
+                    <div class="action-item">
+                        <div class="action-icon">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
+                        Request
+                    </div>
+                    <div class="action-item">
+                        <div class="action-icon">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </div>
+                        Send
+                    </div>
+                    <div class="action-item">
+                        <div class="action-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                            <div
+                                class="dot-indicator"
+                                style="top: 2px; right: 2px"
+                            ></div>
+                        </div>
+                        Inbox
+                    </div>
+                </div>
+
+                <!-- Mocking the Promo Image in Header -->
+                <div class="header-promo">
+                    <h3>
+                        Kuotamu Habis?<br /><span>Masih Bisa</span> Beli Pulsa!
+                    </h3>
+                    <div class="btn-beli">BELI YUK</div>
+                </div>
+            </div>
+
+            <!-- Main Content (White background) -->
+            <div class="main-content">
+                <!-- Services Grid -->
+                <div class="services-card">
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <div class="service-icon icon-google">
+                                <i class="fa-brands fa-google-play"></i>
+                            </div>
+                            <div class="service-text">
+                                Google<br />Play Zone
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div
+                                class="badge-small"
+                                style="background: #4caf50"
+                            >
+                                Rp 600
+                            </div>
+                            <div class="service-icon icon-rewards">
+                                <i class="fa-solid fa-gift"></i>
+                            </div>
+                            <div class="service-text">A+<br />Rewards</div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon icon-pulsa">
+                                <i class="fa-solid fa-mobile-screen"></i>
+                            </div>
+                            <div class="service-text">Pulsa &<br />Data</div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon icon-travel">
+                                <i class="fa-solid fa-plane-departure"></i>
+                            </div>
+                            <div class="service-text">Travel</div>
+                        </div>
+
+                        <div class="service-item">
+                            <div class="badge-small">BARU</div>
+                            <div class="service-icon icon-jolibox">
+                                <i class="fa-solid fa-gamepad"></i>
+                            </div>
+                            <div class="service-text">Jolibox<br />Games</div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon icon-electricity">
+                                <i class="fa-regular fa-lightbulb"></i>
+                            </div>
+                            <div class="service-text">Electricity</div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon icon-kaget">
+                                <i class="fa-solid fa-envelope-open-text"></i>
+                            </div>
+                            <div class="service-text">DANA<br />Kaget</div>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-icon icon-viewall">
+                                <i class="fa-solid fa-border-all"></i>
+                            </div>
+                            <div class="service-text">View All</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feed Section -->
+                <div class="feed-card">
+                    <div class="feed-item">
+                        <div class="feed-icon-left">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div class="feed-text">
+                            <strong>Feed</strong> connect only with trusted
+                            connection!
+                        </div>
+                        <div class="feed-icon-right">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-icon-left">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div class="feed-text">
+                            <strong>Feed</strong> Give a 💬,❤️,🎁 to spread joy!
+                        </div>
+                        <div class="feed-icon-right">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-icon-left">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div class="feed-text">
+                            <strong>Feed</strong> come on in for the latest
+                            updates!
+                        </div>
+                        <div class="feed-icon-right">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                    </div>
+                    <div class="feed-item">
+                        <div class="feed-icon-left">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div class="feed-text">
+                            <strong>Feed</strong> Hi 👋, ready to explore our
+                            exciting feed?
+                        </div>
+                        <div class="feed-icon-right">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Large Promo Banner -->
+                <div class="promo-carousel">
+                    <div class="promo-banner-large">
+                        <h4>Lebih Tenang</h4>
+                        <p
+                            style="
+                                margin-bottom: -5px;
+                                font-size: 16px;
+                                z-index: 2;
+                            "
+                        >
+                            Punya Proteksi s/d
+                        </p>
+                        <h2 style="z-index: 2">
+                            <sup>Rp</sup>100<span>Juta</span>
+                        </h2>
+                        <p style="z-index: 2">Buat Jaga Diri</p>
+                    </div>
+                    <div class="promo-banner-secondary"></div>
+                </div>
+
+                <!-- Protection Banner -->
+                <div class="protection-banner">
+                    <div>
+                        <i
+                            class="fa-solid fa-shield-halved"
+                            style="margin-right: 8px"
+                        ></i>
+                        1 activity protected!
+                    </div>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <nav class="bottom-nav">
+                <div class="nav-item active">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    <span>Home</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>Activity</span>
+                </div>
+
+                <div class="pay-container">
+                    <div class="btn-pay">
+                        <i class="fa-solid fa-qrcode"></i>
+                        <span>PAY</span>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Wallet</span>
+                </div>
+                <div class="nav-item">
+                    <i class="fa-regular fa-circle-user"></i>
+                    <span>Me</span>
+                </div>
+            </nav>
+        </div>
+    </body>
+</html>
